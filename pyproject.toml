@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "downsort"
+version = "1.0.0"
+description = "Smart, local download folder sorter and file organizer with deep PDF inspection"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+  { name = "Harsh Kumar Singh", email = "singh101harshu@gmail.com" }
+]
+keywords = [
+  "download-folder-sorter",
+  "downloads-organizer",
+  "file-organizer",
+  "file-sorter",
+  "pdf-sorter",
+  "automation"
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: System :: Systems Administration",
+  "Topic :: Utilities"
+]
+dependencies = [
+  "fastapi>=0.110.0",
+  "uvicorn>=0.29.0",
+  "pypdf>=5.0.0",
+  "Pillow>=10.0.0"
+]
+
+[project.scripts]
+downsort = "run:main"
+downsort-cli = "cli:main"
+
+[project.urls]
+"Homepage" = "https://github.com/harshkr04/DownSort"
+"Documentation" = "https://harshkr04.github.io/DownSort/"
+"Bug Tracker" = "https://github.com/harshkr04/DownSort/issues"

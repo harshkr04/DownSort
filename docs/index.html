@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DownSort - Smart Download Folder Sorter & Local File Organizer</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="DownSort is a smart, 100% local download folder sorter and file organizer in Python. Automatically sorts PDFs (admit cards, PYQ papers, notes), WhatsApp images, wallpapers, and APKs with 1-click rollback.">
+  <meta name="keywords" content="download folder sorter, downloads organizer, file sorter, python download organizer, sort downloads folder, pdf sorter, local file manager, admit card sorter, whatsapp image sorter">
+  <meta name="author" content="Harsh Kumar Singh">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://harshkr04.github.io/DownSort/">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://harshkr04.github.io/DownSort/">
+  <meta property="og:title" content="DownSort - Smart Download Folder Sorter & File Organizer">
+  <meta property="og:description" content="Tired of a messy downloads folder? DownSort uses deep local content analysis to sort your PDFs, images, movies, and APKs automatically.">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DownSort - Smart Download Folder Sorter">
+  <meta name="twitter:description" content="Intelligent local file organizer with deep PDF text inspection and 1-click undo.">
+
+  <!-- Schema.org SoftwareApplication Markup for Google Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "DownSort",
+    "operatingSystem": "Windows, macOS, Linux",
+    "applicationCategory": "UtilitiesApplication",
+    "description": "Smart, local download folder sorter that inspects PDF contents and image metadata to organize files with 1-click undo.",
+    "url": "https://github.com/harshkr04/DownSort",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Harsh Kumar Singh"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg-dark: #0a0e17;
+      --card-bg: rgba(17, 24, 39, 0.7);
+      --accent-indigo: #6366f1;
+      --accent-purple: #a855f7;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --border-color: rgba(255, 255, 255, 0.08);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 10% 15%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 85%, rgba(168, 85, 247, 0.12) 0%, transparent 40%);
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    header { padding: 40px 0 20px; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 22px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 10px; }
+    .logo-badge { background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple)); padding: 6px 10px; border-radius: 8px; font-size: 14px; }
+    .hero { text-align: center; padding: 70px 0 50px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 20px; font-size: 13px; background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3); margin-bottom: 24px; }
+    h1 { font-size: 46px; font-weight: 800; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.02em; }
+    h1 span { background: linear-gradient(135deg, #818cf8, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-desc { font-size: 18px; color: var(--text-muted); max-width: 720px; margin: 0 auto 36px; }
+    .cta-buttons { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 50px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent-indigo), var(--accent-purple)); color: white; box-shadow: 0 4px 18px rgba(99, 102, 241, 0.35); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(99, 102, 241, 0.5); }
+    .btn-secondary { background: rgba(255, 255, 255, 0.08); color: white; border: 1px solid var(--border-color); }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.12); }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 70px; }
+    .feature-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 28px; backdrop-filter: blur(12px); }
+    .feature-icon { font-size: 32px; margin-bottom: 16px; }
+    .feature-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: #fff; }
+    .feature-text { font-size: 14px; color: var(--text-muted); }
+    .code-preview { background: #000; border: 1px solid var(--border-color); border-radius: 14px; padding: 20px; text-align: left; font-family: monospace; font-size: 14px; color: #a5b4fc; max-width: 600px; margin: 0 auto 60px; overflow-x: auto; }
+    footer { border-top: 1px solid var(--border-color); padding: 40px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
+    footer a { color: #818cf8; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <span class="logo-badge">📁 DownSort</span>
+      </div>
+      <div>
+        <a href="https://github.com/harshkr04/DownSort" class="btn btn-secondary" style="padding: 8px 18px; font-size: 13px;">Star on GitHub ⭐</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-badge">⚡ 100% Local & Privacy-First Downloads Sorter</div>
+      <h1>The Intelligent <span>Download Folder Sorter</span> You've Always Needed</h1>
+      <p class="hero-desc">
+        Stop losing important files in a cluttered Downloads folder. DownSort uses local PDF text analysis and image metadata inspection to organize files into clean, categorized directories with 1-click rollback.
+      </p>
+      <div class="cta-buttons">
+        <a href="https://github.com/harshkr04/DownSort" class="btn btn-primary">View on GitHub</a>
+        <a href="#features" class="btn btn-secondary">Explore Features</a>
+      </div>
+    </section>
+
+    <div class="code-preview">
+      <span style="color: #6b7280;"># 1-Minute Quick Start</span><br>
+      git clone https://github.com/harshkr04/DownSort.git<br>
+      cd DownSort<br>
+      pip install -r requirements.txt<br>
+      python run.py
+    </div>
+
+    <section id="features" class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <div class="feature-title">Deep PDF Sub-Classification</div>
+        <div class="feature-text">Reads PDF text locally to automatically sort Admit Cards, PYQ question papers, lecture notes, certificates, and ID docs. Single/unique PDFs are filed to <code>PDFs/Other</code>.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🖼️</div>
+        <div class="feature-title">Smart Image & Wallpaper Sorter</div>
+        <div class="feature-text">Detects WhatsApp media, passport photos & signatures (via aspect ratio), high-resolution desktop wallpapers (1080p, 4K), and screenshots.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎬</div>
+        <div class="feature-title">Movies, APKs & Software</div>
+        <div class="feature-text">Categorizes high-definition movie releases, screen recordings, Android APKs, and desktop installers (.exe, .msi) automatically.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">↩️</div>
+        <div class="feature-title">1-Click Undo / Rollback</div>
+        <div class="feature-text">Full transaction ledger. If you don't like the organization results, one click restores every single file back to its exact original location.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛡️</div>
+        <div class="feature-title">100% Offline & Private</div>
+        <div class="feature-text">Zero external network calls. All file scanning, PDF reading, and image analysis execute locally on your machine.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💻</div>
+        <div class="feature-title">Web Dashboard & CLI</div>
+        <div class="feature-text">Use the modern interactive web interface or run lightning-fast batch scans directly from PowerShell/terminal with <code>cli.py</code>.</div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Created by <a href="https://github.com/harshkr04">Harsh Kumar Singh</a> • Open Source under MIT License</p>
+    </footer>
+  </div>
+</body>
+</html>
