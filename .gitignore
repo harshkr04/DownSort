@@ -10,6 +10,11 @@ env/
 venv/
 ENV/
 
+# Build / distribution files
+dist/
+build/
+*.egg-info/
+
 # Local sorting history & cache (personal data)
 .sort_history.json
 *.log
