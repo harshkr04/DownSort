@@ -1,6 +1,7 @@
 # 📁 DownSort: Smart Download Folder Sorter & Local File Organizer
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Build & Test](https://github.com/harshkr04/DownSort/actions/workflows/ci.yml/badge.svg)](https://github.com/harshkr04/DownSort/actions/workflows/ci.yml)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Privacy: 100% Local](https://img.shields.io/badge/Privacy-100%25%20Local%20(Offline)-success.svg)]()
