@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DownSort - Smart Local Downloads Organizer</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            <line x1="12" y1="11" x2="12" y2="17"></line>
+            <line x1="9" y1="14" x2="15" y2="14"></line>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">DownSort</h1>
+          <p class="brand-subtitle">Smart Local Downloads & Deep PDF Classifier</p>
+        </div>
+      </div>
+
+      <div class="status-badges">
+        <div class="badge badge-local">
+          <span class="badge-pulse-dot"></span>
+          100% Local & Offline
+        </div>
+        <button id="btnHistory" class="btn btn-secondary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l4 2"></path></svg>
+          History & Undo
+        </button>
+      </div>
+    </header>
+
+    <!-- Folder Bar & Primary Scan -->
+    <div class="control-card">
+      <div class="path-input-group">
+        <div class="path-input-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+          <input type="text" id="folderPathInput" class="path-input" placeholder="Enter downloads folder path...">
+        </div>
+        <button id="btnScan" class="btn btn-primary">
+          <svg id="scanIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span id="scanText">Scan Folder</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid" id="statsGrid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(99, 102, 241, 0.15); color: #818cf8;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="statTotalFiles">0</div>
+          <div class="stat-label">Files Discovered</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(168, 85, 247, 0.15); color: #c084fc;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="statPdfCount">0</div>
+          <div class="stat-label">PDFs Sub-Classified</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="statTotalSize">0 MB</div>
+          <div class="stat-label">Total Downloads Size</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+        <div class="stat-info">
+          <div class="stat-value" id="statCategories">0</div>
+          <div class="stat-label">Categories Target</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Filter Chips -->
+    <div class="category-chips-wrapper">
+      <div class="section-title-row">
+        <div class="section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+          Smart Categories
+        </div>
+        <span id="filterStatus" style="font-size: 12px; color: var(--text-muted);">Showing all files</span>
+      </div>
+      <div class="category-chips" id="categoryChips">
+        <div class="chip active" data-category="ALL">
+          <span>All Files</span>
+          <span class="chip-count" id="countAll">0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Bar -->
+    <div class="action-bar">
+      <div class="action-left">
+        <div class="search-input-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search filenames, reasons, extensions...">
+        </div>
+        <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer; user-select: none;">
+          <input type="checkbox" id="selectAllCheckbox" class="custom-checkbox" checked>
+          <span>Select All Visible</span>
+        </label>
+      </div>
+
+      <div class="action-right">
+        <div class="mode-selector">
+          <button id="modeMove" class="mode-btn active" title="Move files to organized category folders">Move Files</button>
+          <button id="modeCopy" class="mode-btn" title="Copy files to category folders leaving originals intact">Copy Files</button>
+        </div>
+
+        <button id="btnOrganize" class="btn btn-primary" disabled>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <span id="organizeBtnText">Organize Selected</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-card">
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th class="checkbox-col"></th>
+              <th>File Name</th>
+              <th>Size</th>
+              <th>Destination Category</th>
+              <th>AI Detection Reason</th>
+            </tr>
+          </thead>
+          <tbody id="filesTableBody">
+            <tr>
+              <td colspan="5" class="empty-state">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                <p>Click <strong>Scan Folder</strong> above to discover and smartly classify your Downloads folder.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- History & Undo Modal -->
+  <div class="modal-overlay" id="historyModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 style="font-size: 18px; font-weight: 700;">Sorting History & 1-Click Rollback</h2>
+        <button id="btnCloseModal" class="btn btn-secondary" style="padding: 6px 12px;">✕</button>
+      </div>
+      <div class="modal-body" id="historyList">
+        <div class="empty-state">Loading history...</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

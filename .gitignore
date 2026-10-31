@@ -1,0 +1,22 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment and Virtualenvs
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Local sorting history & cache (personal data)
+.sort_history.json
+*.log
+
+# IDE & OS files
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+.DS_Store
