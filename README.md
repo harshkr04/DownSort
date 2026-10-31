@@ -64,7 +64,7 @@ Instead of dumping all PDFs into a single generic directory, DownSort inspects f
 ### Installation
 ```bash
 # 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/DownSort.git
+git clone https://github.com/harshkr04/DownSort.git
 cd DownSort
 
 # 2. Install dependencies
@@ -113,7 +113,7 @@ python cli.py --undo latest
 ---
 
 ## 🤝 Contributing
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/YOUR_USERNAME/DownSort/issues).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/harshkr04/DownSort/issues).
 
 ---
 
